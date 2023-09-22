@@ -184,7 +184,7 @@ int main(void)
 	  }
 
 	  flag = 1 - flag;
-	  HAL_Delay(500);
+	  HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 

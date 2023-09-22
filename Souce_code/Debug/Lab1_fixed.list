@@ -392,8 +392,8 @@ int main(void)
  800031c:	683b      	ldr	r3, [r7, #0]
  800031e:	f1c3 0301 	rsb	r3, r3, #1
  8000322:	603b      	str	r3, [r7, #0]
-	  HAL_Delay(500);
- 8000324:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
+	  HAL_Delay(1000);
+ 8000324:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  8000328:	f000 f980 	bl	800062c <HAL_Delay>
 	  if (counter >= 10) counter = 0;
  800032c:	e7a9      	b.n	8000282 <main+0x1a>
