@@ -106,7 +106,7 @@ void setNumberOnClock(int num){
 		break;
 	}
 }
-
+// Ex 9: -------------------------------------------------------------------------------------
 void clearNumberOnClock(int num){
 	switch(num){
 	case 0:
