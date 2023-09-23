@@ -209,20 +209,28 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  // Ex10: -------------------------------------------------------------------------------------------
+  int counter_hour = 1;
+  int counter_min = 30;
+  int counter_sec = 0;
 
-//  int counter_hour = 2;
-//  int counter_min = 0;
-//  int counter_sec = 0;
-  int counter = 0;
   clearAllClock();
 
   while (1)
   {
-/*
--------------------------------------------------------------------------------------------
+	  if (counter_sec >= 60){
+		  counter_sec = 0;
+		  counter_min ++;
+	  }
+	  if (counter_min >= 60){
+		  counter_min = 0;
+		  counter_hour ++;
+	  }
+	  if (counter_hour >= 12) counter_hour = 0;
+
 // display (0h 00p 00s)
 	  if ((counter_sec / 5 == 0) && (counter_min / 5 == 0) && counter_hour == 0){
-		  clearAllLed();
+		  clearAllClock();
 		  setNumberOnClock(0);
 	  }
 // display second -------------------------------------------------
@@ -255,25 +263,8 @@ int main(void)
 	  	  setNumberOnClock(counter_hour);
 // counter ++ --------------------------------------------------
 	  counter_sec ++;
-
-	  if (counter_sec >= 60){
-		  counter_sec = 0;
-		  counter_min ++;
-	  }
-	  if (counter_min >= 60){
-		  counter_min = 0;
-		  counter_hour ++;
-	  }
-	  if (counter_hour >= 12) counter_hour = 0;
-
-	  HAL_Delay(100);
-      USER CODE END WHILE */
-	  if (counter >= 12){
-		  counter = 0;
-		  clearAllClock();
-	  }
-	  setNumberOnClock(counter++);
-	  HAL_Delay(500);
+      HAL_Delay(100);
+      /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
   }
