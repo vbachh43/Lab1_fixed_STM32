@@ -158,7 +158,7 @@ void clearNumberOnClock(int num){
 	}
 }
 
-void clearAllLed(){
+void clearAllClock(){
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
@@ -213,7 +213,7 @@ int main(void)
 //  int counter_min = 0;
 //  int counter_sec = 0;
   int counter = 0;
-  clearAllLed();
+  clearAllClock();
 
   while (1)
   {
@@ -269,7 +269,7 @@ int main(void)
       USER CODE END WHILE */
 	  if (counter >= 12){
 		  counter = 0;
-		  clearAllLed();
+		  clearAllClock();
 	  }
 	  setNumberOnClock(counter++);
 	  HAL_Delay(500);
