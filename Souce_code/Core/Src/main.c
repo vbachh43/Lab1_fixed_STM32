@@ -47,13 +47,131 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void setNumberOnClock(int num){
+	switch(num){
+	case 0:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET);
+		break;
 
+	case 1:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
+		break;
+
+	case 2:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+		break;
+
+	case 3:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET);
+		break;
+
+	case 4:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET);
+		break;
+
+	case 5:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
+		break;
+
+	case 6:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET);
+		break;
+
+	case 7:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET);
+		break;
+
+	case 8:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_RESET);
+		break;
+
+	case 9:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET);
+		break;
+
+	case 10:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, GPIO_PIN_RESET);
+		break;
+
+	case 11:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, GPIO_PIN_RESET);
+		break;
+	}
+}
+
+void clearNumberOnClock(int num){
+	switch(num){
+	case 0:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET);
+		break;
+
+	case 1:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+		break;
+
+	case 2:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+		break;
+
+	case 3:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
+		break;
+
+	case 4:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+		break;
+
+	case 5:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
+		break;
+
+	case 6:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
+		break;
+
+	case 7:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
+		break;
+
+	case 8:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_SET);
+		break;
+
+	case 9:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
+		break;
+
+	case 10:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, GPIO_PIN_SET);
+		break;
+
+	case 11:
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, GPIO_PIN_SET);
+		break;
+	}
+}
+
+void clearAllLed(){
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET);
+}
 /* USER CODE END 0 */
 
 /**
@@ -83,15 +201,78 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+//  int counter_hour = 2;
+//  int counter_min = 0;
+//  int counter_sec = 0;
+  int counter = 0;
+  clearAllLed();
+
   while (1)
   {
-    /* USER CODE END WHILE */
+/*
+-------------------------------------------------------------------------------------------
+// display (0h 00p 00s)
+	  if ((counter_sec / 5 == 0) && (counter_min / 5 == 0) && counter_hour == 0){
+		  clearAllLed();
+		  setNumberOnClock(0);
+	  }
+// display second -------------------------------------------------
+	  if (counter_sec % 5 == 0){
+		  if (counter_sec != 0 && ((counter_min / 5) != ((counter_sec - 5) / 5))){
+			  clearNumberOnClock((counter_sec - 5) / 5);
+		  }
+		  if ((counter_sec == 0) && (counter_min != 0) && (counter_hour != 0) && (counter_min / 5 != 11) && (counter_hour != 11)){
+			  clearNumberOnClock(11);
+		  }
+		  setNumberOnClock(counter_sec / 5);
+	  }
+// display minute -------------------------------------------------
+	  if (counter_min % 5 == 0){
+		  if ((counter_min != 0) && ((counter_sec / 5) != ((counter_min - 5) / 5))){
+			  clearNumberOnClock((counter_min - 5) / 5);
+		  }
+		  if ((counter_min == 0) && (counter_sec != 0) && (counter_hour != 0) && (counter_sec / 5 != 11) && (counter_hour != 11)){
+			  clearNumberOnClock(11);
+		  }
+		  setNumberOnClock(counter_min / 5);
+	  }
+// display hour ------------------------------------------------
+	  if ((counter_hour != 0) && ((counter_sec / 5) != (counter_hour - 1)) && ((counter_min / 5) != (counter_hour - 1))){
+	  		  clearNumberOnClock(counter_hour - 1);
+	  	  }
+	  	  if ((counter_hour == 0) && (counter_sec != 0) && (counter_min != 0) && (counter_min / 5 != 11) && (counter_sec / 5 != 11)){
+	  	      clearNumberOnClock(11);
+	  	  }
+	  	  setNumberOnClock(counter_hour);
+// counter ++ --------------------------------------------------
+	  counter_sec ++;
+
+	  if (counter_sec >= 60){
+		  counter_sec = 0;
+		  counter_min ++;
+	  }
+	  if (counter_min >= 60){
+		  counter_min = 0;
+		  counter_hour ++;
+	  }
+	  if (counter_hour >= 12) counter_hour = 0;
+
+	  HAL_Delay(100);
+      USER CODE END WHILE */
+	  if (counter >= 12){
+		  counter = 0;
+		  clearAllLed();
+	  }
+	  setNumberOnClock(counter++);
+	  HAL_Delay(500);
 
     /* USER CODE BEGIN 3 */
   }
@@ -131,6 +312,36 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, hour_1_Pin|hour_2_Pin|hour_3_Pin|hour_4_Pin
+                          |hour_5_Pin|hour_6_Pin|hour_7_Pin|hour_8_Pin
+                          |hour_9_Pin|hour_10_Pin|hour_11_Pin|hour_12_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : hour_1_Pin hour_2_Pin hour_3_Pin hour_4_Pin
+                           hour_5_Pin hour_6_Pin hour_7_Pin hour_8_Pin
+                           hour_9_Pin hour_10_Pin hour_11_Pin hour_12_Pin */
+  GPIO_InitStruct.Pin = hour_1_Pin|hour_2_Pin|hour_3_Pin|hour_4_Pin
+                          |hour_5_Pin|hour_6_Pin|hour_7_Pin|hour_8_Pin
+                          |hour_9_Pin|hour_10_Pin|hour_11_Pin|hour_12_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
 }
 
 /* USER CODE BEGIN 4 */
