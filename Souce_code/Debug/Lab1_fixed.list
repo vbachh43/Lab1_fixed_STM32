@@ -77,11 +77,11 @@ Disassembly of section .text:
  8000148:	0800130c 	.word	0x0800130c
 
 0800014c <setNumberOnClock>:
-
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+// Ex 8: -------------------------------------------------------------------------------------
 void setNumberOnClock(int num){
  800014c:	b580      	push	{r7, lr}
  800014e:	b082      	sub	sp, #8

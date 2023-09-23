@@ -54,6 +54,7 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+// Ex 8: -------------------------------------------------------------------------------------
 void setNumberOnClock(int num){
 	switch(num){
 	case 0:
